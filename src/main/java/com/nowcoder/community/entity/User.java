@@ -1,5 +1,7 @@
 package com.nowcoder.community.entity;
 
+import java.util.Date;
+
 public class User {
     private  int id;
     private  String username;
@@ -10,7 +12,7 @@ public class User {
     private int status;
     private  String activationCode;
     private String headerUrl;
-    private  String createTime;
+    private  Date createTime;
 
     public int getId() {
         return id;
@@ -84,11 +86,11 @@ public class User {
         this.headerUrl = headerUrl;
     }
 
-    public String getCreateTime() {
+    public Date getCreateTime() {
         return createTime;
     }
 
-    public void setCreateTime(String createTime) {
+    public void setCreateTime(Date createTime) {
         this.createTime = createTime;
     }
 
