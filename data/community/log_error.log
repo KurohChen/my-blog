@@ -1,4 +1,4 @@
-2023-02-11 11:15:31,181 ERROR [http-nio-8080-exec-1] c.z.h.p.HikariPool [HikariPool.java:574] HikariPool-1 - Exception during pool initialization.
+2023-02-12 09:30:01,605 ERROR [http-nio-8080-exec-1] c.z.h.p.HikariPool [HikariPool.java:574] HikariPool-1 - Exception during pool initialization.
 com.mysql.cj.jdbc.exceptions.CommunicationsException: Communications link failure
 
 The last packet sent successfully to the server was 0 milliseconds ago. The driver has not received any packets from the server.
@@ -109,13 +109,11 @@ The last packet sent successfully to the server was 0 milliseconds ago. The driv
 	at com.mysql.cj.exceptions.ExceptionFactory.createException(ExceptionFactory.java:151)
 	at com.mysql.cj.exceptions.ExceptionFactory.createCommunicationsException(ExceptionFactory.java:167)
 	at com.mysql.cj.protocol.a.NativeProtocol.readMessage(NativeProtocol.java:562)
-	at com.mysql.cj.protocol.a.NativeProtocol.checkErrorMessage(NativeProtocol.java:732)
-	at com.mysql.cj.protocol.a.NativeProtocol.sendCommand(NativeProtocol.java:671)
-	at com.mysql.cj.protocol.a.NativeProtocol.sendCommand(NativeProtocol.java:132)
-	at com.mysql.cj.NativeSession.sendCommand(NativeSession.java:321)
-	at com.mysql.cj.NativeSession.loadServerVariables(NativeSession.java:834)
-	at com.mysql.cj.jdbc.ConnectionImpl.initializePropsFromServer(ConnectionImpl.java:1307)
-	at com.mysql.cj.jdbc.ConnectionImpl.connectOneTryOnly(ConnectionImpl.java:966)
+	at com.mysql.cj.protocol.a.NativeProtocol.readServerCapabilities(NativeProtocol.java:514)
+	at com.mysql.cj.protocol.a.NativeProtocol.beforeHandshake(NativeProtocol.java:404)
+	at com.mysql.cj.protocol.a.NativeProtocol.connect(NativeProtocol.java:1450)
+	at com.mysql.cj.NativeSession.connect(NativeSession.java:165)
+	at com.mysql.cj.jdbc.ConnectionImpl.connectOneTryOnly(ConnectionImpl.java:955)
 	at com.mysql.cj.jdbc.ConnectionImpl.createNewIO(ConnectionImpl.java:825)
 	... 91 common frames omitted
 Caused by: java.net.SocketException: Connection reset
@@ -128,13 +126,9 @@ Caused by: java.net.SocketException: Connection reset
 	at com.mysql.cj.protocol.FullReadInputStream.readFully(FullReadInputStream.java:64)
 	at com.mysql.cj.protocol.a.SimplePacketReader.readHeader(SimplePacketReader.java:63)
 	at com.mysql.cj.protocol.a.SimplePacketReader.readHeader(SimplePacketReader.java:45)
-	at com.mysql.cj.protocol.a.TimeTrackingPacketReader.readHeader(TimeTrackingPacketReader.java:52)
-	at com.mysql.cj.protocol.a.TimeTrackingPacketReader.readHeader(TimeTrackingPacketReader.java:41)
-	at com.mysql.cj.protocol.a.MultiPacketReader.readHeader(MultiPacketReader.java:54)
-	at com.mysql.cj.protocol.a.MultiPacketReader.readHeader(MultiPacketReader.java:44)
 	at com.mysql.cj.protocol.a.NativeProtocol.readMessage(NativeProtocol.java:556)
-	... 99 common frames omitted
-2023-02-11 11:15:31,189 ERROR [http-nio-8080-exec-1] o.a.c.c.C.[.[.[.[dispatcherServlet] [DirectJDKLog.java:175] Servlet.service() for servlet [dispatcherServlet] in context with path [/community] threw exception [Request processing failed; nested exception is org.mybatis.spring.MyBatisSystemException: nested exception is org.apache.ibatis.exceptions.PersistenceException: 
+	... 97 common frames omitted
+2023-02-12 09:30:01,613 ERROR [http-nio-8080-exec-1] o.a.c.c.C.[.[.[.[dispatcherServlet] [DirectJDKLog.java:175] Servlet.service() for servlet [dispatcherServlet] in context with path [/community] threw exception [Request processing failed; nested exception is org.mybatis.spring.MyBatisSystemException: nested exception is org.apache.ibatis.exceptions.PersistenceException: 
 ### Error querying database.  Cause: org.springframework.jdbc.CannotGetJdbcConnectionException: Failed to obtain JDBC Connection; nested exception is com.mysql.cj.jdbc.exceptions.CommunicationsException: Communications link failure
 
 The last packet sent successfully to the server was 0 milliseconds ago. The driver has not received any packets from the server.
@@ -154,18 +148,12 @@ java.net.SocketException: Connection reset
 	at com.mysql.cj.protocol.FullReadInputStream.readFully(FullReadInputStream.java:64)
 	at com.mysql.cj.protocol.a.SimplePacketReader.readHeader(SimplePacketReader.java:63)
 	at com.mysql.cj.protocol.a.SimplePacketReader.readHeader(SimplePacketReader.java:45)
-	at com.mysql.cj.protocol.a.TimeTrackingPacketReader.readHeader(TimeTrackingPacketReader.java:52)
-	at com.mysql.cj.protocol.a.TimeTrackingPacketReader.readHeader(TimeTrackingPacketReader.java:41)
-	at com.mysql.cj.protocol.a.MultiPacketReader.readHeader(MultiPacketReader.java:54)
-	at com.mysql.cj.protocol.a.MultiPacketReader.readHeader(MultiPacketReader.java:44)
 	at com.mysql.cj.protocol.a.NativeProtocol.readMessage(NativeProtocol.java:556)
-	at com.mysql.cj.protocol.a.NativeProtocol.checkErrorMessage(NativeProtocol.java:732)
-	at com.mysql.cj.protocol.a.NativeProtocol.sendCommand(NativeProtocol.java:671)
-	at com.mysql.cj.protocol.a.NativeProtocol.sendCommand(NativeProtocol.java:132)
-	at com.mysql.cj.NativeSession.sendCommand(NativeSession.java:321)
-	at com.mysql.cj.NativeSession.loadServerVariables(NativeSession.java:834)
-	at com.mysql.cj.jdbc.ConnectionImpl.initializePropsFromServer(ConnectionImpl.java:1307)
-	at com.mysql.cj.jdbc.ConnectionImpl.connectOneTryOnly(ConnectionImpl.java:966)
+	at com.mysql.cj.protocol.a.NativeProtocol.readServerCapabilities(NativeProtocol.java:514)
+	at com.mysql.cj.protocol.a.NativeProtocol.beforeHandshake(NativeProtocol.java:404)
+	at com.mysql.cj.protocol.a.NativeProtocol.connect(NativeProtocol.java:1450)
+	at com.mysql.cj.NativeSession.connect(NativeSession.java:165)
+	at com.mysql.cj.jdbc.ConnectionImpl.connectOneTryOnly(ConnectionImpl.java:955)
 	at com.mysql.cj.jdbc.ConnectionImpl.createNewIO(ConnectionImpl.java:825)
 	at com.mysql.cj.jdbc.ConnectionImpl.<init>(ConnectionImpl.java:455)
 	at com.mysql.cj.jdbc.ConnectionImpl.getInstance(ConnectionImpl.java:240)
