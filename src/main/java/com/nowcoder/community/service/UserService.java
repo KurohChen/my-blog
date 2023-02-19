@@ -41,6 +41,10 @@ public class UserService implements CommunityConstant {
     @Value("${server.servlet.context-path}")
     private String contextPath;
 
+    public User findUserByName(String username){
+        return userMapper.selectByName(username);
+    }
+
     public User findUserById(int id){
         return userMapper.selectById(id);
     }
