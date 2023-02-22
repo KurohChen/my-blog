@@ -19,4 +19,19 @@ public class RedisKeyUtil {
         return PREFIX_USER_LIKE + SPLIT + userId;
     }
 
+    //关注目标key
+    private static final String PREFIX_FOLLOWEE = "followee";
+    //粉丝
+    private static final String PREFIX_FOLLOWER = "follower";
+    //某个用户关注的实体
+    // followee:userId:entityType -> zset(entityId,now)
+    public static String getFolloweeKey(int userId,int entityType){
+        return PREFIX_FOLLOWEE + SPLIT + userId + SPLIT + entityType;
+    }
+    // follower:entityType:entityId -> zset(userId,now)
+    public static String getFollowerKey(int entityType,int entityId){
+        return PREFIX_FOLLOWER + SPLIT + entityType + SPLIT + entityId;
+    }
+
+
 }
