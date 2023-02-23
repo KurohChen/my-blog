@@ -34,4 +34,21 @@ public class RedisKeyUtil {
     }
 
 
+    //验证码key
+    private static final String PREFIX_KAPTCHA = "kaptcha";
+    //登录验证码
+    public static String getKaptchaKey(String owner){
+        return PREFIX_KAPTCHA + SPLIT + owner;
+    }
+    private static final String PREFIX_TICKET = "ticket";
+    public static String getTicketKey(String ticket){
+        return PREFIX_TICKET + SPLIT + ticket;
+    }
+
+    private static final String PREFIX_USER = "user";
+    public static String getUserKey(int userId){
+        return PREFIX_USER + SPLIT + userId;
+    }
+
+
 }
