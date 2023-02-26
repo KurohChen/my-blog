@@ -116,6 +116,11 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter implements Comm
                         "/follow",
                         "/unfollow"
                 ).hasAnyAuthority(AUTHORITY_USER,AUTHORITY_ADMIN,AUTHORITY_MODERATOR)
+                .antMatchers("/discuss/top",
+                        "/discuss/wonderful")
+                .hasAnyAuthority(AUTHORITY_MODERATOR)
+                .antMatchers("/discuss/delete")
+                .hasAnyAuthority(AUTHORITY_ADMIN)
                 .anyRequest().permitAll()
                 .and().csrf().disable();
         //权限不够时的处理
@@ -141,7 +146,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter implements Comm
                     @Override
                     public void handle(HttpServletRequest request, HttpServletResponse response, AccessDeniedException e) throws IOException, ServletException {
                         String xRequestWith = request.getHeader("x-requested-with");
-                        if("XMLRequest".equals(xRequestWith)){
+                        if("XMLHttpRequest".equals(xRequestWith)){
                             //异步请求
                             response.setContentType("application/plain;charset=utf-8");
                             PrintWriter writer = response.getWriter();
