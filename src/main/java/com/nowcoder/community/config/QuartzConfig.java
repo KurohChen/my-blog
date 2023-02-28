@@ -1,6 +1,7 @@
 package com.nowcoder.community.config;
 
 import com.nowcoder.community.quartz.AlphaJob;
+import com.nowcoder.community.quartz.PostScoreRefreshJob;
 import org.quartz.JobDataMap;
 import org.quartz.JobDetail;
 import org.quartz.SimpleTrigger;
@@ -43,6 +44,33 @@ public class QuartzConfig {
         factoryBean.setGroup("alphaTriggerGroup");
         //每三秒执行一次
         factoryBean.setRepeatInterval(3000);
+        //trigger的底层需要存储job的状态
+        factoryBean.setJobDataMap(new JobDataMap());
+        return factoryBean;
+    }
+    //刷新帖子分数任务
+    @Bean
+    public JobDetailFactoryBean postScoreRefreshJobDetail(){
+        JobDetailFactoryBean factoryBean = new JobDetailFactoryBean();
+        factoryBean.setJobClass(PostScoreRefreshJob.class);
+        factoryBean.setName("postScoreRefreshJob");
+        factoryBean.setGroup("communityJobGroup");
+        //该任务长久保存
+        factoryBean.setDurability(true);
+        //该任务是不是可恢复的
+        factoryBean.setRequestsRecovery(true);
+        return factoryBean;
+    }
+    //配置Trigger：（SimpleTriggerFactoryBean或CronTriggerFactoryBean）
+    @Bean
+    public SimpleTriggerFactoryBean postScoreRefreshTrigger(JobDetail postScoreRefreshJobDetail){
+        SimpleTriggerFactoryBean factoryBean = new SimpleTriggerFactoryBean();
+        //设置Trigger对哪个Job进行处理
+        factoryBean.setJobDetail(postScoreRefreshJobDetail);
+        factoryBean.setName("postScoreRefreshTrigger");
+        factoryBean.setGroup("communityTriggerGroup");
+        //每三秒执行一次
+        factoryBean.setRepeatInterval(1000*60*5);
         //trigger的底层需要存储job的状态
         factoryBean.setJobDataMap(new JobDataMap());
         return factoryBean;

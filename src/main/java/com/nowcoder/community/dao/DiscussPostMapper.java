@@ -9,7 +9,7 @@ import java.util.List;
 @Mapper
 public interface DiscussPostMapper {
     // 返回选择的帖子，加userId是后续可能会使用到用户主页功能
-    List<DiscussPost> selectDiscussPosts(int userId, int offset, int limit);
+    List<DiscussPost> selectDiscussPosts(int userId, int offset, int limit, int orderMode);
     // 一共有可能有多少页
     // @param用于给参数取别名，如果只有一个参数并且再<if>里使用，则必须取别名。
     int selectDiscussPostRows(@Param("userId") int userId);
@@ -23,5 +23,7 @@ public interface DiscussPostMapper {
     int updateType(int id,int type);
 
     int updateStatus(int id,int status);
+
+    int updateScore(int id,double score);
 
 }
